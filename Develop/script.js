@@ -35,13 +35,13 @@ function generatePassword() {
     allowedChars += lowerCaseChars;
   }
 
-  var pwUpperCase = confirm("Do you want uppercase character (A-Z)?")
+  var pwUpperCase = confirm("Do you want uppercase characters (A-Z)?")
 
   if (pwUpperCase) {
     allowedChars += upperCaseChars;
   }
 
-  var pwNumeric = confirm("Do you want Numeric character (0-9)?")
+  var pwNumeric = confirm("Do you want Numeric characters (0-9)?")
 
   if (pwNumeric) {
     allowedChars += numericChars;
