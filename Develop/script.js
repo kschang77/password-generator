@@ -18,49 +18,47 @@ function generatePassword() {
   }
 
   // generate the allowable characters array based on choices
+  // defined prompts and acceptable inputs for each instance
   var allowedChars = ""
   var generatedPwd = ""
 
   var lowerCaseChars = "abcdefghijklmnopqrstuvwxyz"
+  var lowerCasePrompt = "lowercase"
 
   var upperCaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  var upperCasePrompt = "uppercase"
 
   var numericChars = "0123456789"
+  var numericPrompt = "numeric"
   
   var specialChars = " !\"#$%& '()*+,-./:;<=>?@[\\]^_`{|}~"
+  var specialPrompt = "special"
 
-  var pwLowerCase = confirm("Do you want lowercase characters (a-z)?")
-
-  if (pwLowerCase) {
-    allowedChars += lowerCaseChars;
+  function promptForChar (allowed,acceptable, prompt) {
+    var strPrompt = `Do you want to include ${prompt}?\nExample: [${acceptable}]\nOK=Yes Cancel=No`;
+    var userInput = confirm(strPrompt);
+    if (userInput) {
+      allowed += acceptable;
+    }
   }
 
-  var pwUpperCase = confirm("Do you want uppercase characters (A-Z)?")
+  // rewrote separate calls into consolidated function
+  promptForChar (allowedChars, lowerCaseChars, lowerCasePrompt);
 
-  if (pwUpperCase) {
-    allowedChars += upperCaseChars;
-  }
+  promptForChar (allowedChars, upperCaseChars, upperCasePrompt);
 
-  var pwNumeric = confirm("Do you want Numeric characters (0-9)?")
+  promptForChar (allowedChars, numericChars, numericPrompt);
 
-  if (pwNumeric) {
-    allowedChars += numericChars;
-  }
+  promptForChar (allowedChars,specialChars,specialPrompt);
 
-  var pwSpecial = confirm("Do you want special characters? ( !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~) ")
-
-  if (pwSpecial) {
-    allowedChars += specialChars;
-  }
-
+  
   // if it's still empty, they chose CANCEL in all four cases, error out
   if (allowedChars.length===0) {
-    alert("You must want at least one among (lowercase, uppercase, numeric, special)")
+    alert("You must have at least one \namong (lowercase, uppercase, numeric, special)")
     return ""
   }
 
   // now allowedChars contains all acceptable characters
-
   var i ;
   for (i = 1; i < pwLength; i++) {
       var rnum = Math.floor(Math.random() * allowedChars.length);
