@@ -35,21 +35,27 @@ function generatePassword() {
   var specialPrompt = "special"
 
   function promptForChar (allowed,acceptable, prompt) {
+    var totalstr = "";
     var strPrompt = `Do you want to include ${prompt}?\nExample: [${acceptable}]\nOK=Yes Cancel=No`;
     var userInput = confirm(strPrompt);
     if (userInput) {
-      allowed += acceptable;
+      totalstr=allowed+acceptable;
     }
+    else {
+      totalstr=allowed;
+    }
+    console.log(totalstr)
+    return totalstr
   }
 
   // rewrote separate calls into consolidated function
-  promptForChar (allowedChars, lowerCaseChars, lowerCasePrompt);
+  allowedChars = promptForChar (allowedChars, lowerCaseChars, lowerCasePrompt);
 
-  promptForChar (allowedChars, upperCaseChars, upperCasePrompt);
+  allowedChars = promptForChar (allowedChars, upperCaseChars, upperCasePrompt);
 
-  promptForChar (allowedChars, numericChars, numericPrompt);
+  allowedChars = promptForChar (allowedChars, numericChars, numericPrompt);
 
-  promptForChar (allowedChars,specialChars,specialPrompt);
+  allowedChars = promptForChar (allowedChars,specialChars,specialPrompt);
 
   
   // if it's still empty, they chose CANCEL in all four cases, error out
